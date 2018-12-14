@@ -1,0 +1,27 @@
+import { Counters } from "./Counters";
+import {Entity} from "../../../../src/decorator/entity/Entity";
+import {PrimaryGeneratedColumn} from "../../../../src/decorator/columns/PrimaryGeneratedColumn";
+import {Column} from "../../../../src/decorator/columns/Column";
+
+@Entity()
+export class Post {
+
+    @PrimaryGeneratedColumn()
+    id: number;
+
+    @Column()
+    title: string;
+
+    @Column()
+    text: string;
+
+    @Column(type => Counters)
+    counters: Counters;
+
+    @Column(type => Counters, { prefix: "testCounters" })
+    otherCounters: Counters;
+
+    @Column(type => Counters, { prefix: "" })
+    countersWithoutPrefix: Counters;
+
+}
