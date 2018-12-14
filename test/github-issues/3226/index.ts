@@ -13,7 +13,7 @@ describe("github issues > #3226 TypeORM wrong generate field name for relations 
     beforeEach(() => reloadTestingDatabases(connections));
     after(() => closeTestingConnections(connections));
 
-    it("should properly generate column names", () => Promise.all(connections.map(async connection => {
+    it("should properly generate relation column names", () => Promise.all(connections.map(async connection => {
         const postRepository = connection.getRepository(Post);
         const columns = postRepository.metadata.columns;
         const databaseColumns = columns.map(c => c.databaseName);
