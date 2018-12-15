@@ -9,16 +9,17 @@ describe("github issues > #3226 TypeORM wrong generate field name for relations 
     let connections: Connection[];
     before(async () => connections = await createTestingConnections({
         entities: [__dirname + "/entity/*{.js,.ts}"],
+        enabledDrivers: ["postgres"]
     }));
     beforeEach(() => reloadTestingDatabases(connections));
     after(() => closeTestingConnections(connections));
 
-    it("should properly generate relation column name", () => Promise.all(connections.map(async connection => {
+    it("should correctly generate relation column name", () => Promise.all(connections.map(async connection => {
         const postRepository = connection.getRepository(Post);
         const columns = postRepository.metadata.columns;
         const databaseColumns = columns.map(c => c.databaseName);
 
-        // expect(databaseColumns).to.have.contain("countersInformationDesc");
+        expect(databaseColumns).to.have.contain("countersInformationDesc");
 
         expect(databaseColumns).to.have.members([
             // Post
