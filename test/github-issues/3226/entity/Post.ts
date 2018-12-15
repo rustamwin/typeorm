@@ -18,10 +18,4 @@ export class Post {
     @Column(type => Counters)
     counters: Counters;
 
-    @Column(type => Counters, { prefix: "testCounters" })
-    otherCounters: Counters;
-
-    @Column(type => Counters, { prefix: "" })
-    countersWithoutPrefix: Counters;
-
 }
